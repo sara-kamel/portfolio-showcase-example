@@ -11,7 +11,7 @@ Welcome to the Portfolio Showcase Example! This repository contains a fully resp
 - **Formik Integration**: Robust form handling for a functional contact section.
 - **Yup Validation**: Ensures form data integrity in the contact form.
 - **Chakra UI**: For a smooth and accessible user interface.
-- **Pretend Projects Section**: to add your own projects instead.
+- **Projects Section**: to add your own projects instead.
 - **Contact Form**: Allows visitors to easily reach out to you, with validation handled by Yup and styling by Chakra UI.
 
 ## Getting Started
@@ -27,4 +27,6 @@ Ensure you have the following installed:
 ### Installation
 
 - Clone the repository.
+- Navigate to the root direcotry and run npm install
+- Run the application by running npm start
    
