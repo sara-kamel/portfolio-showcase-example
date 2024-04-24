@@ -7,7 +7,8 @@ import {
   faMedium,
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
-import { Box, HStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Stack } from "@chakra-ui/react";
+import { wrap } from "framer-motion";
 
 const socials = [
   {
@@ -42,18 +43,21 @@ const Header = () => {
   const [hide, setHide] = useState(0);
 
   useEffect(() => {
-    const startPoint = 600;
-    let lastScrollY = window.scrollY;
+    let prevScrollPos = window.scrollY;
 
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > startPoint) {
-        setHide(true);
-      } else {
-        setHide(false);
+      const currentScrollPos = window.scrollY;
+      const headerElement = headerRef.current;
+      if (!headerElement) {
+        return;
       }
+      if (prevScrollPos > currentScrollPos) {
+        headerElement.style.transform = "translateY(0)";
+      } else {
+        headerElement.style.transform = "translateY(-200px)";
+      }
+      prevScrollPos = currentScrollPos;
     };
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -73,29 +77,35 @@ const Header = () => {
       });
     }
   };
+const HeaderStyles ={
+  backgroundColor:"#18181b",
+  position: "fixed",
+  top: 0,
+  left: 0,
+  right: 0,
+  zIndex: 1,
+}
 
   return (
     <Box
+    style={HeaderStyles}
+      translateY={0}
+      transitionProperty="transform"
+      transitionDuration=".3s"
+      transitionTimingFunction="ease-in-out"
       ref={headerRef}
-      position="fixed"
-      top={0}
-      left={0}
-      right={0}
-      style={{
-        transform: hide ? "translateY(-200px)" : "translateY(0px)",
-        transition: "transform ease-in-out 0.5S",
-        backgroundColor: "#18181b",
-        zIndex: "1",
-      }}
+     
     >
-      <Box color="white" maxWidth="1280px" margin="0 auto">
-        <HStack
+      <Box color="white" maxWidth="90%" margin="0 auto">
+        <Stack
+        direction="row"
+        flexWrap="wrap"
           px={16}
           py={4}
           justifyContent="space-between"
           alignItems="center"
+          width= "100%"
         >
-          <nav style={{ color: "white" }}>
             <HStack>
               {socials.map((link) => (
                 <a key={link.id} href={link.url}>
@@ -103,8 +113,8 @@ const Header = () => {
                 </a>
               ))}
             </HStack>
-          </nav>
-          <nav>
+      
+      
             <HStack spacing={8}>
               <a href="#projects-section" onClick={handleClick("projects")}>
                 Projects
@@ -113,10 +123,11 @@ const Header = () => {
                 Contact Me
               </a>
             </HStack>
-          </nav>
-        </HStack>
+          
+        </Stack>
       </Box>
     </Box>
+   
   );
 };
 export default Header;
