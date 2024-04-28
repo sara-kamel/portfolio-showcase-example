@@ -40,7 +40,6 @@ const socials = [
 
 const Header = () => {
   const headerRef = useRef();
-  const [hide, setHide] = useState(0);
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -77,57 +76,57 @@ const Header = () => {
       });
     }
   };
-const HeaderStyles ={
-  backgroundColor:"#18181b",
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  zIndex: 1,
-}
+  const HeaderStyles = {
+    backgroundColor: "#18181b",
+    width:"100%",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1,
+    color: "white",
+  };
 
   return (
     <Box
-    style={HeaderStyles}
+      style={HeaderStyles}
       translateY={0}
       transitionProperty="transform"
       transitionDuration=".3s"
       transitionTimingFunction="ease-in-out"
       ref={headerRef}
-     
+    
+      
     >
-      <Box color="white" maxWidth="90%" margin="0 auto">
-        <Stack
-        direction="row"
-        flexWrap="wrap"
-          px={16}
-          py={4}
-          justifyContent="space-between"
-          alignItems="center"
-          width= "100%"
-        >
-            <HStack>
-              {socials.map((link) => (
-                <a key={link.id} href={link.url}>
-                  <FontAwesomeIcon icon={link.icon} size="2x" />
+      <Box >
+        <Stack  direction={['column', 'row']} p={2} alignItems="center"  justifyContent="space-evenly" flexWrap="wrap">
+          <nav>
+            <HStack spacing={5}>
+              {socials.map(({ icon, url }) => (
+                <a
+                  key={url}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon icon={icon} size="2x" key={url} />
                 </a>
               ))}
             </HStack>
-      
-      
-            <HStack spacing={8}>
-              <a href="#projects-section" onClick={handleClick("projects")}>
+          </nav>
+          <nav>
+            <HStack spacing={5}>
+              <a href="#projects" onClick={handleClick("projects")}>
                 Projects
               </a>
-              <a href="#contactme-section" onClick={handleClick("contactme")}>
+              <a href="#contactme" onClick={handleClick("contactme")}>
                 Contact Me
               </a>
             </HStack>
-          
+          </nav>
         </Stack>
       </Box>
     </Box>
-   
   );
 };
 export default Header;

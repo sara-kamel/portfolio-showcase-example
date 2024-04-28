@@ -51,21 +51,26 @@ const LandingSection = () => {
     }),
   });
 
+  const FormStyles = {
+    width: "80%",
+  };
   return (
     <FullScreenSection
       isDarkBackground
       backgroundColor="#512DA8"
       py={16}
       spacing={8}
+      width="100%"
     >
-      <VStack w="1024px" p={32} alignItems="flex-start" >
-        <Heading as="h1" id="contactme-section">
+      <VStack p={32} alignItems="center">
+        <Heading style={{ textAlign: "center" }} as="h1" id="contactme-section">
           Contact me
         </Heading>
-        <Box p={6} rounded="md" w="100%">
-          <form onSubmit={formik.handleSubmit}>
+        <Box p={6} rounded="md">
+          <form onSubmit={formik.handleSubmit} className="form">
             <VStack spacing={4}>
               <FormControl
+      
                 isInvalid={
                   formik.touched.firstName && !!formik.errors.firstName
                 }
@@ -94,6 +99,7 @@ const LandingSection = () => {
                 isInvalid={formik.touched.type && !!formik.errors.type}
               >
                 <FormLabel htmlFor="type">Type of enquiry</FormLabel>
+
                 <Select id="type" name="type" {...formik.getFieldProps("type")}>
                   <option value="hireMe">Freelance project proposal</option>
                   <option value="openSource">
