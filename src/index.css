@@ -1,9 +1,15 @@
-.form input{
-    width: 900px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
 }
 
-@media screen and (max-width: 600px){
-    .form input{
-        width: 300px
+.card {
+  width: 90%;
+}
+
+@media screen and (min-width: 600px) {
+    .card{
+        width: 45%;
     }
 }

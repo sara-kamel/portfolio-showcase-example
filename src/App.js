@@ -11,9 +11,9 @@ import "./index.css";
 function App() {
   return (
     <ChakraProvider>
-      <AlertProvider>
+        <Header/>
+      <AlertProvider >
         <main>
-          <Header />
           <LandingSection />
           <ProjectsSection />
           <ContactMeSection />
